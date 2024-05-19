@@ -1,6 +1,10 @@
-/* Dimitra Deveaux | Software Development I | May 19th,2024
-*  Book class: --brief explanation of this class as it relates to the overall program
-* */
+/*
+ * Dimitria Deveaux
+ * CEN 3024 - Software Development I
+ * May 19th,2024
+ * Book.java
+ *  This class creates a book object that sets the book ID, title and author.
+*/
 
 public class Book {
     private int bookID;
@@ -33,9 +37,13 @@ public class Book {
         this.title = title;
     }
 
-    /* ToString method to display the book information */
+    /* Method: ToString
+    * parameter: none
+    * return: String
+    * purpose: to display the book information
+    * */
     @Override
     public String toString() {
-        return bookID + ". " + title + " " + author;
+        return bookID + ", " + title + ", " + author;
     }
 }

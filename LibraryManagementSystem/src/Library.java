@@ -1,37 +1,71 @@
-/* Dimitra Deveaux | Software Development I | May 19th,2024
- *  Library class: --brief explanation of this class as it relates to the overall program
- * */
+/*
+ * Dimitria Deveaux
+ * CEN 3024 - Software Development I
+ * May 19th,2024
+ * Library.java
+ *  This class creates a library object and performs the following: adding books to lms, removing books from the lms,
+ *  and printing books that are in the lms.
+ */
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
-public class Library <T>{
-    //attribute
-    private List<T> bookList;
+public class Library {
+    private ArrayList<Book> bookList;
 
-    //constructor
     public Library(){
         bookList = new ArrayList<>();
     }
 
-    //method to add data to the bookList
-    public void add(T book){
+    /* method: addBook
+     * parameter: Book
+     * return: none
+     * purpose: to add data to the list
+     * */
+    public void addBook(Book book){
         bookList.add(book);
     }
 
-    //method to remove a book from the list
-    public void remove(T book){
-        bookList.remove(book);
+    /* method: addBooksFromFile
+     * parameter: String filename
+     * return: none
+     * purpose: to read the user file upload and add the books to the LMS
+     * */
+    public void addBooksFromFile(String filename) {
+        try {
+            File file = new File(System.getProperty("user.home") + "/Desktop/" + filename);
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] fileDetails = line.split(",");
+                if (fileDetails.length == 3) {
+                    addBook(new Book(Integer.parseInt(fileDetails[0].trim()), fileDetails[1].trim(), fileDetails[2].trim()));
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred while reading the file.");
+        }
     }
 
-    //toString method to return book list
-    @Override
-    public String toString(){
-        return "Books:" + bookList;
+    /* method: removeBook
+     * parameter: int bookID
+     * return: none
+     * purpose: to remove a book from the list
+     * */
+    public void removeBook(int bookID){
+        bookList.remove(bookID);
     }
 
+    /* method: printBookList
+     * parameter: none
+     * return: none
+     * purpose: to print the current list of books in the LMS
+     * */
     public void printBookList(){
-        for(T book : bookList){
+        for(Book book : bookList){
             System.out.println(book);
         }
     }
